@@ -1,0 +1,7 @@
+#commentDiv {
+	height: 300px;
+}
+#articleDiv {
+	height: 400px;
+	overflow: auto;
+}
