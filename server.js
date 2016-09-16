@@ -8,8 +8,7 @@ var cheerio = require('cheerio');
 
 app.use(express.static('public'));
 
-mongoose.connect('mongodb://localhost/mongocheeriomongodb://heroku_5vvcz754:\
-	4nbamickqdgsgoheglg32kmf8v@ds033076.mlab.com:33076/heroku_5vvcz754');
+mongoose.connect('mongodb://localhost/mongocheerio');
 var db = mongoose.connection;
 
 db.on('error', function(err) {
