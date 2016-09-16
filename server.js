@@ -57,6 +57,13 @@ app.post('/addComment', function(req, res) {
 
 });
 
+app.post('/removeComment/:commentId', function(req, res) {
+	Comment.remove({_id: req.params.commentId}, function(err, removed) {
+		console.log(removed);
+	});
+
+});
+
 app.get('/articles', function(req, res) {
 
 	Article.find({}).populate('comments')
@@ -82,34 +89,44 @@ app.get('/comments', function(req, res) {
 		}
 	});
 });
-app.get('/scrape', function(req, res) {
+app.post('/scrape', function(req, res) {
 	request('https://www.reddit.com/r/webdev', function(err, response, html) {
 		if (err) {
 			throw err
 		}
 		var $ = cheerio.load(html);
-
-		var result = {};
-
 		$('p.title').each(function (index, element) {
+			var result = {};
 			var title = $(element).text();
 			var link = $(element).find('a').first().attr('href');
 			if (link.indexOf('http:') === -1 && link.indexOf('https:') === -1) {
 				link = 'https://www.reddit.com' + link;
 			};
-
-			result.title = title;
-			result.link = link;
-
-			var entry = new Article(result);
-
-			entry.save(function(err, doc) {
+			Article.find({link: link}, function(err, doc){
 				// log any errors
-				if (err) {
+				if (err){
 					console.log(err);
-				} else {
-					console.log(doc);
-				};
+				} 
+				// or send the doc to the browser as a json object
+				else {
+					if (doc.length === 0) {
+						result.title = title;
+						result.link = link;
+
+						var entry = new Article(result);
+
+						entry.save(function(err, doc) {
+							// log any errors
+							if (err) {
+								console.log(err);
+							} else {
+								console.log(doc);
+							};
+						});
+					} else {
+						console.log('Article is already in DB')
+					}
+				}
 			});
 		});
 	});
