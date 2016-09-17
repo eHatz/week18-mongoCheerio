@@ -6,8 +6,30 @@ function loadArticle(loadWhat) {
 		if (indexData < data.length) {
 			console.log('running inside of if at index:', indexData)
 			if (loadWhat === 'everything') {
-				$('#articleDiv').html('<p>' + data[indexData].title + '</p>');
-				$('#articleDiv').append('<p>' + data[indexData].link + '</p><br>');
+				$('#articleDiv').html('<h2>' + data[indexData].title + '</h2>');
+				$('#articleDiv').append('<a href=' + data[indexData].link + '>' + data[indexData].link + '</a><br>\
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis nulla mauris. In hac habitasse platea dictumst.\
+					 Vivamus eleifend mauris non arcu consectetur ultricies. Morbi vel odio in magna dapibus aliquet nec sed orci. \
+					 Donec leo orci, euismod a consectetur rutrum, maximus eget nisi. Duis molestie eros ut quam fringilla,\
+					 in eleifend metus imperdiet. Donec tempor ex sapien, consectetur sollicitudin neque fermentum lacinia.Suspendisse \
+					 cursus orci dui, sit amet ultrices sem dignissim sit amet. Mauris eu justo mi. Pellentesque in erat id velit \
+					 sollicitudin gravida in ut elit. Integer a velit mi. Aliquam pellentesque odio rhoncus ante dapibus, non porttitor\
+					  lacus semper. Sed a auctor eros. Ut aliquet condimentum congue. Quisque eros neque, tincidunt vitae sem quis, tempor\
+					   euismod elit. Nam lectus arcu, consectetur et posuere et, consequat sed leo. Fusce ut dapibus enim.Curabitur vehicula\
+					    justo interdum, eleifend nunc id, finibus nulla. Sed maximus lobortis rutrum. Proin dictum, dui eget aliquet semper,\
+					     neque felis aliquam libero, sed posuere augue nulla facilisis velit. Proin fermentum erat feugiat, tristique eros quis,\
+					      ornare ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc pulvinar\
+					       mi quis fermentum condimentum. Integer est est, volutpat ac finibus non, finibus in lectus. Mauris sit amet posuere \
+					       magna.Nunc egestas lacus nunc. Nullam tristique lacus nec diam egestas, eget rutrum ex cursus. Proin placerat erat \
+					       ut sem pharetra dignissim. Quisque feugiat mattis massa, ut pretium libero pulvinar ut. Nunc vestibulum laoreet leo \
+					       in malesuada. Sed et tellus scelerisque, semper massa ac, consectetur lacus. Pellentesque semper sed lacus et facilisis.\
+					        Ut a sagittis tellus. Vestibulum vestibulum odio efficitur condimentum placerat. Cras in lectus hendrerit risus suscipit \
+					        imperdiet. Vivamus molestie nulla vehicula metus posuere, a bibendum purus varius. Phasellus volutpat ante vitae magna\
+					         efficitur, sollicitudin faucibus enim euismod.Nam in ex varius, pellentesque erat quis, luctus lectus. Ut nec nibh \
+					         elementum, vestibulum ipsum in, rutrum sem. Donec interdum arcu non erat hendrerit malesuada. Praesent ut ipsum nisi.\
+					          Morbi scelerisque feugiat metus, sed pellentesque est. In eget enim varius, fermentum enim sed, efficitur est. Fusce\
+					           ut eros justo. Aenean scelerisque maximus risus, et varius justo laoreet eget. Ut sagittis diam quis ante pellentesque, \
+					            fringilla neque pretium.</p>');
 				$('#articleDiv').data('articleid', data[indexData]._id);
 				$('#commentDiv').html('');
 
@@ -22,10 +44,10 @@ function loadArticle(loadWhat) {
 					var deleteBtn = $('<button>', {
 						text: 'Delete',
 						id: comment._id,
-						class: 'deleteBtn'
+						class: 'deleteBtn btn btn-danger'
 					});
 
-					$(singleCommentDiv).append('<p>' + comment.comment + '</p><br>');
+					$(singleCommentDiv).append('<p>' + comment.comment + '</p>');
 					$(singleCommentDiv).append(deleteBtn);
 					$('#commentDiv').append(singleCommentDiv);
 				};
@@ -43,10 +65,10 @@ function loadArticle(loadWhat) {
 					var deleteBtn = $('<button>', {
 						text: 'Delete',
 						id: comment._id,
-						class: 'deleteBtn'
+						class: 'deleteBtn btn btn-normal'
 					});
 
-					$(singleCommentDiv).append('<p>' + comment.comment + '</p><br>');
+					$(singleCommentDiv).append('<p>' + comment.comment + '</p>');
 					$(singleCommentDiv).append(deleteBtn);
 					$('#commentDiv').append(singleCommentDiv);
 				};
@@ -83,7 +105,7 @@ $(document).on('click','.deleteBtn', function() {
 	}).done(function(data) {
 
 	});
-	
+
 	loadArticle('comments');
 });
 
