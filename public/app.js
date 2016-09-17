@@ -65,7 +65,7 @@ function loadArticle(loadWhat) {
 					var deleteBtn = $('<button>', {
 						text: 'Delete',
 						id: comment._id,
-						class: 'deleteBtn btn btn-normal'
+						class: 'deleteBtn btn btn-danger'
 					});
 
 					$(singleCommentDiv).append('<p>' + comment.comment + '</p>');
